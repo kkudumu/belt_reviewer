@@ -1,0 +1,7 @@
+bcrypt==3.1.4
+cffi==1.11.2
+Django==1.10
+psycopg2==2.7.3.1
+pycparser==2.18
+pygame==1.9.3
+six==1.11.0

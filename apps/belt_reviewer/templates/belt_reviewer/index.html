@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+
+<body>
+    {% if messages %}
+    <ul>
+        {% for message in messages %} {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <li>
+            <h2>{{ message }}</h2>
+        </li>
+        {% else %}
+        <li>
+            <h2>{{ message }}</h2>
+        </li>
+        {% endif %} {% endfor %}
+    </ul>
+    {% endif %}
+    <h4>Register</h4>
+    <form action="/register" method="post">
+        {% csrf_token %}
+
+            <label> First Name:</label>
+            <br>
+            <input type="text" name="first_name">
+            <br>
+            <label> Last Name:</label>
+            <br>
+            <input type="text" name="last_name">
+            <br>
+            <label> Email:</label>
+            <br>
+            <input type="text" name="email">
+            <br>
+            <label> Password:</label>
+            <br>
+            <input type="password" name="password">
+            <br>
+            <label>Confirm PW:</label>
+            <br>
+            <input type="password" name="confirm_password">
+            <br>
+            <input type="submit" value="Add">
+            <br>
+    </form>
+    <h4>Login</h4>
+    <form action="/login" method="post">
+        {% csrf_token %}
+            <label> Email:</label><br>
+            <input type="email" name="login_email" id="login_email"><br>
+            <label> Password:</label><br>
+            <input type="password" name="login_password" id="login_password"><br>
+            <input type="submit" value="Login">
+
+    </form>
+</body>
+
+</html>

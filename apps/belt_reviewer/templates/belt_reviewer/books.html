@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Home</title>
+    </head>
+    <body>
+        <h1>Welcome, {{ request.session.user.first_name }}</h1>
+        <a href="/addbook">Add Book and Review</a>
+        <a href="/logout">Logout</a>
+        
+        <h3>Recent Book Reviews:</h3>
+        {% for book in books %}
+        <p class="book_title"><a href="/book/{{book.id}}">{{book.title}}</a></p>
+
+            {% for review in reviews %}
+                {% if review.book.title == book.title %}
+                    {% if review.user.id == request.session.user.id %}
+                    <form action="/remove" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="cancel" value="{{review.id}}">
+                        <input type="submit" value="X" class="cancel">
+                    </form>
+                    {% endif %}
+                    <p class="rating">Rating: {{ review.review_rating }}</p>
+                    <p class="review"><a class="username" href="/display_user/{{review.user.id}}">{{review.user.first_name}}</a>says: {{review.review_des}}</p>
+                    <p class="date">Posted on {{ review.created_at }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <h4>Other Books With Reviews: </h4>
+            {% for book in bookswithreviews %}
+                    <p class="otherbooks"><a href="/book/{{book.id}}">{{book.title}}</a></p>
+                    <br>
+            {% endfor %}
+
+
+
+    </body>
+</html>

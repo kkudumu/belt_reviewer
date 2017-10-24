@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+    <a href="/bookspage">Home</a>
+    <a href="/logout">Logout</a>
+    
+    <form action="/process_addbook" method="post">
+        {% csrf_token %}
+       <table>
+           <tr>
+               <td><p>Book Title:</p></td>
+               <td><input type="text" name="book_title"></td>
+           </tr>
+           <tr><td><p>Author:</p></td></tr>
+           <tr>
+               <table>
+                   <tr>
+                       <td><p>Choose from the list:</p></td>
+                       <td><select name="author_name">
+                        {% for author in authors %}
+                            <option value="{{author.id}}">{{ author.name }}</option>
+                        {% endfor %}       
+                    </select></td>
+                   </tr>
+                   <tr>
+                       <td><p>Or add a new author:</p></td>
+                       <td><input type="text" name="new_author"></td>
+                   </tr>
+               </table>
+           </tr>
+           <tr>
+                <td><p class="th">Review:</p></td>
+                <td><textarea name="review_description" cols="40" rows="5"></textarea></td>
+            </tr>
+           <tr>
+               <td><p>Rating:</p></td>
+               <td><select name="rating">
+                <option value="5">5</option>       
+                <option value="4">4</option>       
+                <option value="3">3</option>       
+                <option value="2">2</option>       
+                <option value="1">1</option>       
+            </select></td>
+           </tr>
+           <tr>
+               <input type="submit" name="submit" value="Add">
+           </tr>
+       </table>
+       </form>
+</body>
+</html>
